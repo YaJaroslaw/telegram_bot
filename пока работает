@@ -1,0 +1,511 @@
+import telebot
+from telebot import types
+from telegram_bot_item_class import *
+bot = telebot.TeleBot("5930873929:AAHaf594jk7IE3m0ceD-vaM22wD6y7LIZr0")
+# photo = open(Место, "rb") документация
+item = []
+a = 0
+tp = 0
+
+'''
+def fight():
+    def fight_all(m1, m2, m3, m4, m5, m6, m7, m8, m9):
+        global need_op
+        global op
+        global lvl
+        global HP
+        global ATK
+        global DEF
+        global MP
+        global speed
+        global money
+        global player_skill
+        bot.send_message(message.chat.id,text="бой начался!".format(message.from_user),parse_mode="html")
+        h = m1[0]
+        a = m1[1]
+        d = m1[2]
+        r = m1[3]
+        h1 = m2[0]
+        a1 = m2[1]
+        d1 = m2[2]
+        r1 = m2[3]
+        # ------------------------------------------------------------------------------------------------------ БЕРСЕРК
+        atk = 0
+        if class1 == "берсерк":
+            DEF1 = DEF
+            HP1 = HP
+            ATK1 = ATK
+            dmg = ATK1
+            MP1 = MP
+            speed1 = speed
+            playerHP = HP1
+            monsHP1 = h
+            monsHP2 = h1
+            ATK_up = input("вы хотите повысить атаку? (100/50) \n")
+            if ATK_up == "100":
+                HP += + 10
+                ATK1 += int(HP / 5)
+                print("ATK", ATK1)
+                playerHP = 1
+                print("HP", playerHP)
+            elif ATK_up == "50":
+                ATK1 += int(((HP * 50) / 100) / 5)
+                print("ATK", ATK1)
+                playerHP = int((playerHP * 50) / 100)
+                print("HP", playerHP)
+            else:
+                print("атака не повышена")
+
+            while playerHP > 1 and monsHP1 > 1 or monsHP2 > 1:
+                print("выберите атаку ")
+                ataka = input()
+                if ataka == "q":
+                    atk = "zone_atk"
+                    dmg = ATK1
+                elif ataka == "w q":
+                    if ("w q") in player_skill:
+                        atk = int(input("кого хотите атаковать(1/2) "))
+                        dmg = ATK1 * 3
+                    else:
+                        atk = int(input(
+                            "у вас нет этой атаки \nпо этому вы атакуете базовой :D \nкого хотите атаковать(1/2) "))
+                        dmg = ATK1
+                else:
+                    atk = int(input("кого хотите атаковать(1/2) "))
+                    dmg = ATK1
+                if d >= dmg:
+                    d = dmg
+                    d1 = dmg
+                if DEF1 >= a:
+                    DEF1 = a
+                if monsHP1 > 1:
+                    if atk == 1:
+                        monsHP1 += h - dmg + d + r - h
+                        dmg = 0
+                if monsHP2 > 1:
+                    if atk == 2:
+                        monsHP2 += h1 - dmg + d1 + r1 - h1
+                        dmg = 0
+                if monsHP1 > 1 or monsHP2 > 1:
+                    if atk == "zone_atk":
+                        monsHP1 += h - dmg + d + r - h
+                        monsHP2 += h1 - dmg + d1 + r1 - h1
+                        dmg = 0
+
+                if monsHP1 > 1:
+                    print("здоровье 1 монстра", monsHP1)
+                    print("вас атакует 1 монстр",
+                          a - DEF1)  # всем по***, берсерк 1 НР убивает 2го монстра и побеждает -----------------------------------------------------------------------------------------------------
+                    playerHP += - a + DEF1
+                else:
+                    print("1 монстр мертв")
+                if monsHP2 > 1:
+                    print("здоровье 2 монстра", monsHP2)
+                    print("вас атакует 2 монстр", a1 - DEF1)
+                    playerHP += - a1 + DEF1
+                else:
+                    print("2 монстр мертв")
+                print("здоровье игрока", playerHP)
+            if playerHP < 1:
+                print("поражение")
+            if monsHP1 < 1 or monsHP2 < 1:
+                print("победа")
+                receive_op = h + h1
+                op += + receive_op
+                money += (h + h1) / 10
+                print("получено опыта", receive_op)
+                if op > need_op - 1:
+                    print("уровень повышен!")
+                    need_op = + 100
+                    lvl += + 1
+                    HP += + 10
+                    free_lvl = input("что вы хотите прокачать \nHP \nATK \nDEF \nMP \nsepeed \n")
+                    if free_lvl == "HP":
+                        HP += + 10
+                    elif free_lvl == "ATK":
+                        HP += + 10
+                    elif free_lvl == "DEF":
+                        HP += + 10
+                    elif free_lvl == "MP":
+                        HP += + 10
+                    elif free_lvl == "speed":
+                        HP += + 10
+        # ------------------------------------------------------------------------------------------------------ ЖНЕЦ
+        if class1 == "жнец":
+            ATK += + 5
+            DEF1 = DEF
+            HP1 = HP
+            dmg = ATK
+            MP1 = MP
+            speed1 = speed
+            playerHP = HP1
+            monsHP1 = h
+            monsHP2 = h1
+            dmg = int((dmg * 50) / 100)
+            while monsHP1 > 1 or monsHP2 > 1 and playerHP > 1:
+                if DEF >= a:
+                    DEF1 = a
+                if monsHP1 > 1 and monsHP2 > 1:
+                    print("выберите атаку")
+                    ataka = input()
+                    if ataka != ".":
+                        monsHP1 += h - dmg + d + r - h
+                    if ataka != ".":
+                        monsHP2 += h1 - dmg + d1 + r1 - h1
+                if monsHP1 > 1:
+                    print("здоровье 1 монстра", monsHP1)
+                    print("вас атакует 1 монстр", a - DEF1)
+                    playerHP += - a + DEF1
+                else:
+                    print("1 монстр мертв")
+                if monsHP2 > 1:
+                    print("здоровье 2 монстра", monsHP2)
+                    print("вас атакует 2 монстр", a1 - DEF1)
+                    playerHP += - a1 + DEF1
+                else:
+                    print("2 монстр мертв")
+                print("здоровье игрока", playerHP)
+                if d >= ATK:
+                    d = dmg
+                    d1 = dmg
+            if playerHP < 1:
+                print("поражение")
+            elif monsHP1 < 1 or monsHP2 < 1:
+                print("победа")
+                receive_op = h + h1
+                op = op + receive_op
+                print("получено опыта", receive_op)
+                if op > need_op - 1:
+                    print("уровень повышен!")
+                    need_op = + 100
+                    lvl += + 1
+                    ATK += + 1
+                    free_lvl = input("что вы хотите прокачать \nHP \nATK \nDEF \nMP \nsepeed \n")
+                    if free_lvl == "HP":
+                        HP += + 10
+                    elif free_lvl == "ATK":
+                        ATK += + 1
+                    elif free_lvl == "DEF":
+                        HP += + 10
+                    elif free_lvl == "MP":
+                        HP += + 10
+                    elif free_lvl == "speed":
+                        HP += + 10
+        # ------------------------------------------------------------------------------------------------------ МЕЧНИК
+        if class1 == "мечник":
+            DEF1 = DEF
+            HP1 = HP
+            dmg = ATK
+            MP1 = MP
+            speed1 = speed
+            playerHP = HP1
+            monsHP1 = h
+            monsHP2 = h1
+            while monsHP1 > 1 or monsHP2 > 1 and playerHP > 1:
+                if DEF >= a:
+                    DEF1 = a
+                if d >= ATK:
+                    d = dmg
+                    d1 = dmg
+                second_atk = random.randint(1, 3)
+                if second_atk == 3:
+                    atk2 = int(input("кого хотите атаковать(1/2)"))
+                    if monsHP1 > 1:
+                        if atk2 == 1:
+                            print("выберите атаку")
+                            ataka = input()
+                            if ataka != ".":
+                                monsHP1 += h - dmg + d + r - h
+                    if monsHP2 > 1:
+                        if atk2 == 2:
+                            print("выберите атаку")
+                            ataka = input()
+                            if ataka != ".":
+                                monsHP2 += h1 - dmg + d1 + r1 - h1
+                    print("здоровье 1 монстра", monsHP1)
+                    print("здоровье 2 монстра", monsHP2)
+                atk2 = int(input("кого хотите атаковать(1/2)"))
+                if monsHP1 > 1:
+                    if atk2 == 1:
+                        print("выберите атаку")
+                        ataka = input()
+                        if ataka != ".":
+                            monsHP1 += h - dmg + d + r - h
+                if monsHP2 > 1:
+                    if atk2 == 2:
+                        print("выберите атаку")
+                        ataka = input()
+                        if ataka != ".":
+                            monsHP2 += h1 - dmg + d1 + r1 - h1
+                if monsHP1 > 1:
+                    print("здоровье 1 монстра", monsHP1)
+                    print("вас атакует 1 монстр", a - DEF1)
+                    playerHP += - a + DEF1
+                else:
+                    print("1 монстр мертв")
+                if monsHP2 > 1:
+                    print("здоровье 2 монстра", monsHP2)
+                    print("вас атакует 2 монстр", a1 - DEF1)
+                    playerHP += - a1 + DEF1
+                else:
+                    print("2 монстр мертв")
+                print("здоровье игрока", playerHP)
+            if op > need_op - 1:
+                print("уровень повышен!")
+                need_op = + 100
+                lvl += + 1
+                ATK += + 1
+                free_lvl = input("что вы хотите прокачать \nHP \nATK \nDEF \nMP \nsepeed \n")
+                if free_lvl == "HP":
+                    HP += + 10
+                elif free_lvl == "ATK":
+                    ATK += + 1
+                elif free_lvl == "DEF":
+                    HP += + 10
+                elif free_lvl == "MP":
+                    HP += + 10
+                elif free_lvl == "speed":
+                    HP += + 10
+            if playerHP < 1:
+                print("поражение")
+            elif monsHP1 < 1 or monsHP2 < 1:
+                print("победа")
+                receive_op = h + h1
+                print("получено опыта", receive_op)
+                if op > need_op - 1:
+                    print("уровень повышен!")
+                    need_op = + 100
+                    lvl += + 1
+                    HP += + 10
+                    free_lvl = input("что вы хотите прокачать \nHP \nATK \nDEF \nMP \nsepeed \n")
+                    if free_lvl == "HP":
+                        HP += + 10
+                    elif free_lvl == "ATK":
+                        HP += + 10
+                    elif free_lvl == "DEF":
+                        HP += + 10
+                    elif free_lvl == "MP":
+                        HP += + 10
+                    elif free_lvl == "speed":
+                        HP += + 10
+        # ------------------------------------------------------------------------------------------------------ МАГ
+        coldown_skyfire = 0
+        atk = 0
+        atk1 = 0
+        atk2 = 0
+        atk3 = 0
+        atk4 = 0
+        atk5 = 0
+        if class1 == "маг":
+            if MP == 0:
+                HP -= 50
+                MP += 10
+            DEF1 = DEF
+            HP1 = HP
+            dmg = ATK
+            MP1 = MP
+            speed1 = speed
+            playerHP = HP1
+            monsHP1 = h
+            monsHP2 = h1
+            magic_dmg = 0
+            while playerHP > 1 and monsHP1 > 1 or monsHP2 > 1:
+                if d >= ATK:
+                    d = dmg
+                    d1 = dmg
+                if DEF >= a:
+                    DEF1 = a
+                print(MP1, "маны осталось")
+                print("выберите атаку ")
+                ataka = input()
+                if ataka == "q":
+                    atk = int(input("кого хотите атаковать(1/2) "))
+                    magic_dmg += 10
+                    print("вы использовали базовое заклинание")
+                elif ataka == "qe":
+                    if element1 == "fire" or element2 == "fire":
+                        if MP1 >= 10:
+                            atk = int(input("кого хотите атаковать(1/2) "))
+                            magic_dmg += 20
+                            print("вы использовали огненные пули")
+                            MP1 -= 10
+                elif ataka == "skyfire":
+                    if element1 == "fire" or element2 == "fire":
+                        if MP1 >= 10:
+                            if coldown_skyfire == 1:
+                                atk = "zone_atk"
+                                magic_dmg += 50
+                                print("вы использовали захоронение под небесным пламенем")
+                                MP1 -= 10
+                            else:
+                                coldown_skyfire += 1
+                                print("заклинание заряжается")
+                elif ataka == "qfw":
+                    if element1 == "wind" or element2 == "wind":
+                        MP1 -= 10
+                        atk = int(input("кого хотите атаковать(1/2) "))
+                        magic_dmg = 10
+                        second_atk = random.randint(1, 2)
+                        print(second_atk)
+                        if second_atk == 1:
+                            atk1 = atk
+                            second_atk = random.randint(1, 2)
+                            print(second_atk)
+                            if second_atk == 1:
+                                atk2 = atk
+                elif ataka == "instantdeath":
+                    if element1 == "wind" or element2 == "wind":
+                        atk = int(input("кого хотите атаковать(1/2) "))
+                        mana_expenses = int(input("затраты маны: "))
+                        MP1 -= mana_expenses
+                        magic_dmg = mana_expenses
+
+                if monsHP1 > 1:
+                    if atk == 1:
+                        monsHP1 += - magic_dmg + r
+                        if atk1 == 1:
+                            monsHP1 += - magic_dmg + r
+                            if atk2 == 1:
+                                monsHP1 += - magic_dmg + r
+                    atk1 = 0
+                    atk2 = 0
+                    magic_dmg = 0
+                if monsHP2 > 1:
+                    if atk == 2:
+                        monsHP2 += - magic_dmg + r1
+                        if atk1 == 1:
+                            monsHP2 += - magic_dmg + r1
+                            if atk2 == 1:
+                                monsHP2 += - magic_dmg + r1
+                    atk1 = 0
+                    atk2 = 0
+                    magic_dmg = 0
+                if monsHP1 > 1 or monsHP2 > 1:
+                    if atk == "zone_atk":
+                        monsHP1 += - magic_dmg + r
+                        monsHP2 += - magic_dmg + r
+                        magic_dmg = 0
+
+                if monsHP1 > 1:
+                    print("здоровье 1 монстра", monsHP1)
+                    print("вас атакует 1 монстр", a - DEF1)
+                    playerHP += - a + DEF1
+                    if playerHP < 1:
+                        break
+                else:
+                    print("1 монстр мертв")
+                if monsHP2 > 1:
+                    print("здоровье 2 монстра", monsHP2)
+                    print("вас атакует 2 монстр", a1 - DEF1)
+                    playerHP += - a1 + DEF1
+
+                else:
+                    print("2 монстр мертв")
+                print("здоровье игрока", playerHP)
+            if playerHP < 1:
+                print("поражение")
+            elif monsHP1 < 1 or monsHP2 < 1:
+                print("победа")
+                receive_op = h + h1
+                receive_money = (h + h1) / 10
+                op += + receive_op
+                money += receive_money
+                print("получено опыта", receive_op)
+                if op > need_op - 1:
+                    print("уровень повышен!")
+                    need_op = + 100
+                    lvl += + 1
+                    HP += + 10
+                    free_lvl = input("что вы хотите прокачать \nHP \nATK \nDEF \nMP \nsepeed \n")
+                    if free_lvl == "HP":
+                        HP += + 10
+                    elif free_lvl == "ATK":
+                        HP += + 10
+                    elif free_lvl == "DEF":
+                        HP += + 10
+                    elif free_lvl == "MP":
+                        HP += + 10
+                    elif free_lvl == "speed":
+                        HP += + 10
+'''
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    btn1 = types.KeyboardButton("начать")
+    btn2 = types.KeyboardButton("вопрос")
+    markup.add(btn1, btn2)
+    bot.send_message(message.chat.id, text="готовы ли вы начать?".format(message.from_user), reply_markup=markup)
+
+
+@bot.message_handler()
+def get_user_text(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    global a,tp
+    print(a)
+    print(message.text)
+    print(message)
+    if message.text == "начать":
+        a = 1
+        btn1 = types.KeyboardButton("останусь на холме и осмотрюсь")
+        btn2 = types.KeyboardButton("спущусь с холма")
+        markup.add(btn1, btn2)
+        bot.send_message(message.chat.id, text="Вы появляетесь на холме, вокруг вас редкий лес, недалеко виден город."
+                                               " Также вы замечаете, что вашу сторону движется группа гоблинов."
+                                               " Что вы сделаете?".format(message.from_user),reply_markup=markup)
+# --------------------------------------- на холме
+    if message.text == "останусь на холме и осмотрюсь" and a == 1 or tp == 1:
+        a = 2
+        btn1 = types.KeyboardButton("да")
+        btn2 = types.KeyboardButton("нет")
+        markup.add(btn1, btn2)
+        bot.send_message(message.chat.id, text="вы осмариваетесь, вокруг видены остатки массива рядом лежит"
+                                                " потрепанный черный плащ, мешочек с 5 монетами и плохенький"
+                                                " магический посох. Хотите ли все это взять?".format(message.from_user), reply_markup=markup)
+    if message.text == "да" and a == 2 or tp == 2:
+        a = 3
+        tp = 4
+        item.append(armor_1["start_cloac"])
+        bot.send_message(message.chat.id, text="вы подобрали все что лежало, но теперь когда гоблины уже близко у вас"
+                                               " есть только один путь: быстрее спускаться".format(message.from_user),
+                         parse_mode="html")
+    if message.text == "нет" and a == 2 or tp == 3:
+        a = 3
+        tp = 4
+        bot.send_message(message.chat.id, text="вы решили не брать лишние вещи так как нечто столь незначительное не поможет вам"
+                                               " в ваших великий совершениях, но теперь когда гоблины уже близко у вас"
+                                               " есть только один путь: быстрее спускаться".format(message.from_user),
+                         parse_mode="html")
+# --------------------------------------- город
+    if message.text == "спущусь с холма" and a == 1 or tp == 4:
+        tp = 0
+        a = 4
+        btn1 = types.KeyboardButton("пойду в город")
+        btn2 = types.KeyboardButton("пойду в лес!")
+        markup.add(btn1, btn2)
+        bot.send_message(message.chat.id,
+                         text="спустившись с холма вы идете по лесу через некоторое время лес начинает переходить в луг"
+                              " и перед вами виднеются стены города. Зайдете в город или же решите испытать"
+                              " судьбу и пойти сразу в лес?".format(message.from_user),reply_markup=markup)
+    if message.text == "пойду в город" and a == 4 or tp == 5:
+        a = 5
+        btn1 = types.KeyboardButton("уйти")
+        btn2 = types.KeyboardButton("набить морду")
+        btn3 = types.KeyboardButton("дать денег")
+        if "start_cloac" in armor_1:
+            btn3 = types.KeyboardButton("незаметно проскользнуть")
+        else:
+            pass
+        markup.add(btn1, btn2, btn3)
+        bot.send_message(message.chat.id,
+                         text="на входе в город стоит стражник он говорит что для входа в город надо предъявить жетон,"
+                              " если у вас его нету то вход воспрещен если у вас есть плащ то вы можете незаметно"
+                              " проскользнуть мимо него, попробовать дать ему денег или набить ему морду".format(message.from_user),reply_markup=markup)
+        
+
+
+
+
+
+
+bot.polling(none_stop=True)
